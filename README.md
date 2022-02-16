@@ -1,1 +1,1 @@
-# TourOfGolang
+# Tour of Golang
