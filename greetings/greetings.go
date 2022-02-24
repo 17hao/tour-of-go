@@ -3,6 +3,7 @@ package greetings
 import (
 	"errors"
 	"fmt"
+	"github.com/bytedance/sonic"
 	"math/rand"
 	"time"
 )
@@ -16,7 +17,7 @@ func Hello(name string) (string, error) {
 	return message, nil
 }
 
-func Hellos(names []string) (map[string]string, error) {
+func Hellos(names []string) ([]byte, error) {
 	messages := make(map[string]string)
 	for _, name := range names {
 		message, err := Hello(name)
@@ -25,7 +26,7 @@ func Hellos(names []string) (map[string]string, error) {
 		}
 		messages[name] = message
 	}
-	return messages, nil
+	return sonic.Marshal(messages)
 }
 
 func init() {

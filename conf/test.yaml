@@ -1,0 +1,5 @@
+env-variables:
+gopath:
+  - /usr/bytedance/go
+goroot:
+  - /usr/local/go

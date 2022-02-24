@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/bytedance/sonic"
 	"log"
 	"shiqihao.xyz/tour-of-go/greetings"
 )
@@ -27,5 +28,9 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(messages)
+	var res map[string]string
+	sonic.Unmarshal(messages, &res)
+	for k, v := range res {
+		fmt.Println(k, " ", v)
+	}
 }
