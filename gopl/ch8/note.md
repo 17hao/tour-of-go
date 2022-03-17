@@ -1,0 +1,1 @@
+为什么`<-done`可以等到background goroutine结束
