@@ -12,11 +12,12 @@ var (
 )
 
 func main() {
-	wg.Add(3)
+	wg.Add(2)
 	go accumulate()
 	go accumulate()
-	accumulate()
 	wg.Wait()
+	wg.Add(1)
+	accumulate()
 	log.Println(count)
 }
 
