@@ -228,6 +228,18 @@ func (s *CalcContext) Stat(i int) IStatContext {
 	return t.(IStatContext)
 }
 
+func (s *CalcContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(CalcListener); ok {
+		listenerT.EnterCalc(s)
+	}
+}
+
+func (s *CalcContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(CalcListener); ok {
+		listenerT.ExitCalc(s)
+	}
+}
+
 func (s *CalcContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case CalcVisitor:
@@ -354,6 +366,18 @@ func (s *BlankContext) NEWLINE() antlr.TerminalNode {
 	return s.GetToken(CalcParserNEWLINE, 0)
 }
 
+func (s *BlankContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(CalcListener); ok {
+		listenerT.EnterBlank(s)
+	}
+}
+
+func (s *BlankContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(CalcListener); ok {
+		listenerT.ExitBlank(s)
+	}
+}
+
 func (s *BlankContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case CalcVisitor:
@@ -400,6 +424,18 @@ func (s *PrintExprContext) Expr() IExprContext {
 
 func (s *PrintExprContext) NEWLINE() antlr.TerminalNode {
 	return s.GetToken(CalcParserNEWLINE, 0)
+}
+
+func (s *PrintExprContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(CalcListener); ok {
+		listenerT.EnterPrintExpr(s)
+	}
+}
+
+func (s *PrintExprContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(CalcListener); ok {
+		listenerT.ExitPrintExpr(s)
+	}
 }
 
 func (s *PrintExprContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
@@ -452,6 +488,18 @@ func (s *AssignContext) Expr() IExprContext {
 
 func (s *AssignContext) NEWLINE() antlr.TerminalNode {
 	return s.GetToken(CalcParserNEWLINE, 0)
+}
+
+func (s *AssignContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(CalcListener); ok {
+		listenerT.EnterAssign(s)
+	}
+}
+
+func (s *AssignContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(CalcListener); ok {
+		listenerT.ExitAssign(s)
+	}
 }
 
 func (s *AssignContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
@@ -619,6 +667,18 @@ func (s *ParensContext) Expr() IExprContext {
 	return t.(IExprContext)
 }
 
+func (s *ParensContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(CalcListener); ok {
+		listenerT.EnterParens(s)
+	}
+}
+
+func (s *ParensContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(CalcListener); ok {
+		listenerT.ExitParens(s)
+	}
+}
+
 func (s *ParensContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case CalcVisitor:
@@ -699,6 +759,18 @@ func (s *MulDivContext) MUL() antlr.TerminalNode {
 
 func (s *MulDivContext) DIV() antlr.TerminalNode {
 	return s.GetToken(CalcParserDIV, 0)
+}
+
+func (s *MulDivContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(CalcListener); ok {
+		listenerT.EnterMulDiv(s)
+	}
+}
+
+func (s *MulDivContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(CalcListener); ok {
+		listenerT.ExitMulDiv(s)
+	}
 }
 
 func (s *MulDivContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
@@ -783,6 +855,18 @@ func (s *AddSubContext) SUB() antlr.TerminalNode {
 	return s.GetToken(CalcParserSUB, 0)
 }
 
+func (s *AddSubContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(CalcListener); ok {
+		listenerT.EnterAddSub(s)
+	}
+}
+
+func (s *AddSubContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(CalcListener); ok {
+		listenerT.ExitAddSub(s)
+	}
+}
+
 func (s *AddSubContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case CalcVisitor:
@@ -815,6 +899,18 @@ func (s *IdContext) ID() antlr.TerminalNode {
 	return s.GetToken(CalcParserID, 0)
 }
 
+func (s *IdContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(CalcListener); ok {
+		listenerT.EnterId(s)
+	}
+}
+
+func (s *IdContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(CalcListener); ok {
+		listenerT.ExitId(s)
+	}
+}
+
 func (s *IdContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case CalcVisitor:
@@ -845,6 +941,18 @@ func (s *IntContext) GetRuleContext() antlr.RuleContext {
 
 func (s *IntContext) INT() antlr.TerminalNode {
 	return s.GetToken(CalcParserINT, 0)
+}
+
+func (s *IntContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(CalcListener); ok {
+		listenerT.EnterInt(s)
+	}
+}
+
+func (s *IntContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(CalcListener); ok {
+		listenerT.ExitInt(s)
+	}
 }
 
 func (s *IntContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
