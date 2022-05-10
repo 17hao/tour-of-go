@@ -21,6 +21,10 @@ type LowerStruct struct {
 	s string
 }
 
+type OriginStruct struct {
+	s string
+}
+
 func (u UpperStruct) toUpperCase() string {
 	return strings.ToUpper(u.s)
 }
@@ -40,6 +44,7 @@ func (l LowerStruct) toLowerCase() string {
 type MyStruct struct {
 	*UpperStruct
 	*LowerStruct
+	*OriginStruct
 }
 
 func main() {
