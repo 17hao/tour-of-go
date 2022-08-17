@@ -13,8 +13,8 @@ func Foo28() int {
 
 func main() {
 	type User struct {
-		Name string `json:"name"`
-		Age int `json:"age"`
+		Name    string `json:"name"`
+		Age     int    `json:"age"`
 		Address string `json:"address,omitempty"`
 	}
 

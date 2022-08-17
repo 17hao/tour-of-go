@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/antlr/antlr4/runtime/Go/antlr"
 	"os"
+
+	"github.com/antlr/antlr4/runtime/Go/antlr"
 	"shiqihao.xyz/tour-of-go/antlr/expr/parser"
 )
 

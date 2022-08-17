@@ -13,14 +13,14 @@ func main() {
 	go func() {
 		for x := 0; ; x++ {
 			naturals <- x
-			time.Sleep(1*time.Second)
+			time.Sleep(1 * time.Second)
 		}
 	}()
 
 	// Squarer
 	go func() {
 		for {
-			x := <- naturals
+			x := <-naturals
 			squares <- x * x
 		}
 	}()

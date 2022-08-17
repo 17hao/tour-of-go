@@ -16,8 +16,8 @@ func Balance1() int {
 func teller() {
 	var balance int // balance is confined to teller goroutine
 	for {
-		select{
-		case amount := <- deposits:
+		select {
+		case amount := <-deposits:
 			balance += amount
 		case balances <- balance:
 		}

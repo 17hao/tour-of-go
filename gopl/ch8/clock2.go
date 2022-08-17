@@ -22,7 +22,7 @@ func main() {
 func handleConn2(c net.Conn) {
 	defer c.Close()
 	for {
-		_, err := io.WriteString(c, time.Now().Format(time.RFC3339 + "\n"))
+		_, err := io.WriteString(c, time.Now().Format(time.RFC3339+"\n"))
 		if err != nil {
 			return
 		}

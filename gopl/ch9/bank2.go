@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 var (
-	sema = make(chan struct{}, 1)
+	sema    = make(chan struct{}, 1)
 	balance int
 )
 

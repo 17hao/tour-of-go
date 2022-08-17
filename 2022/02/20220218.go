@@ -3,11 +3,12 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"os"
+	"strings"
+
 	"github.com/bytedance/sonic"
 	"github.com/emirpasic/gods/maps/treemap"
 	"github.com/umpc/go-sortedmap"
-	"os"
-	"strings"
 )
 
 func main() {
@@ -18,9 +19,9 @@ func main() {
 }
 
 type Employee struct {
-	Id int `json:"id"`
+	Id   int    `json:"id"`
 	Name string `json:"name"`
-	Age int `json:"age"`
+	Age  int    `json:"age"`
 }
 
 func sonicDemo() {
