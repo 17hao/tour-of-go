@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/bytedance/sonic"
 	"log"
+
+	"github.com/bytedance/sonic"
 	"shiqihao.xyz/tour-of-go/greetings"
 )
 

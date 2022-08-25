@@ -3,9 +3,10 @@ package greetings
 import (
 	"errors"
 	"fmt"
-	"github.com/bytedance/sonic"
 	"math/rand"
 	"time"
+
+	"github.com/bytedance/sonic"
 )
 
 func Hello(name string) (string, error) {
