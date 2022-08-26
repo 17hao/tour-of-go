@@ -1,11 +1,10 @@
-package thrift_tutorial
+package tutorial
 
 import (
 	"context"
 	"fmt"
 	"strconv"
 
-	//"shiqihao.xyz/tour-of-go/gen-go/shared"
 	"shiqihao.xyz/tour-of-go/gen-go/tutorial"
 )
 

@@ -3,7 +3,7 @@ package main
 import "github.com/nyaruka/phonenumbers"
 
 func main() {
-	phoneNum, _ := phonenumbers.Parse("15868170425", "CN")
-	res := phonenumbers.IsValidNumber(phoneNum)
+	phoneNum, _ := phonenumbers.Parse("+639694878122", "PH")
+	res := phonenumbers.IsValidNumberForRegion(phoneNum, "PH")
 	println(res)
 }

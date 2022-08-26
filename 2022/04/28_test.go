@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/smartystreets/goconvey/convey"
 	"math"
 	"testing"
+
+	"github.com/smartystreets/goconvey/convey"
 )
 
 func TestFoo28(t *testing.T) {

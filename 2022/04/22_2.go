@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
-	"github.com/antlr/antlr4/runtime/Go/antlr"
 	"os"
-	"shiqihao.xyz/tour-of-go/antlr/calc/parser"
 	"strconv"
+
+	"github.com/antlr/antlr4/runtime/Go/antlr"
+	"shiqihao.xyz/tour-of-go/antlr/calc/parser"
 )
 
 type MyCalcVisitor struct {

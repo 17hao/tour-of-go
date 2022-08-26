@@ -2,12 +2,13 @@ package main
 
 import (
 	"context"
+	"log"
+	"time"
+
 	"github.com/17hao/echo_server/kitex_gen/api"
 	"github.com/17hao/echo_server/kitex_gen/api/echoservice"
 	"github.com/cloudwego/kitex/client"
 	"github.com/cloudwego/kitex/client/callopt"
-	"log"
-	"time"
 )
 
 func main() {

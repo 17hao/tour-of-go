@@ -1,25 +1,4 @@
-/**
- * https://github.com/apache/thrift/blob/master/tutorial/tutorial.thrift
- */
-
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements. See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership. The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License. You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied. See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
+// https://github.com/apache/thrift/blob/master/tutorial/tutorial.thrift
 
 # Thrift Tutorial
 # Mark Slee (mcslee@facebook.com)
@@ -66,16 +45,7 @@ include "shared.thrift"
  * Thrift files can namespace, package, or prefix their output in various
  * target languages.
  */
-
 namespace go  tutorial
-namespace cpp tutorial
-namespace d tutorial
-namespace dart tutorial
-namespace java tutorial
-namespace php tutorial
-namespace perl tutorial
-namespace haxe tutorial
-namespace netstd tutorial
 
 /**
  * Thrift lets you do typedefs to get pretty names for your types. Standard
@@ -152,10 +122,3 @@ service Calculator extends shared.SharedService {
    oneway void zip()
 
 }
-
-/**
- * That just about covers the basics. Take a look in the test/ folder for more
- * detailed examples. After you run this file, your generated code shows up
- * in folders with names gen-<language>. The generated code isn't too scary
- * to look at. It even has pretty indentation.
- */

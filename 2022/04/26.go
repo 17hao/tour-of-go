@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/antlr/antlr4/runtime/Go/antlr"
 	"shiqihao.xyz/tour-of-go/antlr/calc/parser"
 )
@@ -24,9 +25,4 @@ func main() {
 	tree := p.Prog()
 	listener := NewMyListener()
 	antlr.ParseTreeWalkerDefault.Walk(listener, tree)
-}
-
-// ===============
-func Foo26() int {
-	return 0x7fffffff
 }

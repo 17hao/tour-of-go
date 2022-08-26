@@ -1,4 +1,4 @@
-package thrift_tutorial
+package tutorial
 
 import (
 	"context"
