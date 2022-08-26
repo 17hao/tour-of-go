@@ -1,13 +1,35 @@
 package main
 
 import (
+	"log"
+
 	"github.com/apache/thrift/lib/go/thrift"
-	"shiqihao.xyz/tour-of-go/rpc/thrift/tutorial"
+	"shiqihao.xyz/tour-of-go/gen-go/tutorial"
+	"shiqihao.xyz/tour-of-go/rpc/thrift/tutorial/server"
 )
 
 func main() {
-	transportFactory := thrift.NewTFramedTransportFactory(thrift.NewTTransportFactory())
-	protocolFactory := thrift.NewTBinaryProtocolFactoryDefault()
 	host := "localhost:9090"
-	tutorial.RunServer(transportFactory, protocolFactory, host, false)
+	runServer(host)
+}
+
+func runServer(addr string) {
+	handler := server.NewCalculatorHandler()
+	processor := tutorial.NewCalculatorProcessor(handler)
+
+	transport, err := thrift.NewTServerSocket(addr)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	transportFactory := thrift.NewTFramedTransportFactoryConf(thrift.NewTTransportFactory(), &thrift.TConfiguration{})
+	protocolFactory := thrift.NewTBinaryProtocolFactoryConf(&thrift.TConfiguration{})
+
+	s := thrift.NewTSimpleServer4(processor, transport, transportFactory, protocolFactory)
+
+	log.Printf("Starting the tutorial server on %s\n", addr)
+	err = s.Serve()
+	if err != nil {
+		log.Fatal(err)
+	}
 }
