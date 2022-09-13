@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/17hao/tour-of-go/antlr/expr/parser"
 	"github.com/antlr/antlr4/runtime/Go/antlr"
-	"shiqihao.xyz/tour-of-go/antlr/expr/parser"
 )
 
 type TreeShapeListener struct {
