@@ -6,9 +6,8 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"time"
 	thrift "github.com/apache/thrift/lib/go/thrift"
-
+	"time"
 )
 
 // (needed to ensure safety because of naive import list construction.)
@@ -19,13 +18,13 @@ var _ = time.Now
 var _ = bytes.Equal
 
 const INT32CONSTANT = 9853
+
 var MAPCONSTANT map[string]string
 
 func init() {
-MAPCONSTANT = map[string]string{
-  "goodnight": "moon",
-  "hello": "world",
-}
+	MAPCONSTANT = map[string]string{
+		"goodnight": "moon",
+		"hello":     "world",
+	}
 
 }
-

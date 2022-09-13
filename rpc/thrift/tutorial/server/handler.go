@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"shiqihao.xyz/tour-of-go/gen-go/tutorial"
+	"github.com/17hao/tour-of-go/thrift-gen/tutorial"
 )
 
 type CalculatorHandler struct {

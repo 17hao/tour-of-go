@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/17hao/tour-of-go/thrift-gen/tutorial"
 	"github.com/apache/thrift/lib/go/thrift"
-	"shiqihao.xyz/tour-of-go/gen-go/tutorial"
 )
 
 func main() {

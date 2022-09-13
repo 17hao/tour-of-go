@@ -3,9 +3,9 @@ package main
 import (
 	"log"
 
+	"github.com/17hao/tour-of-go/rpc/thrift/tutorial/server"
+	"github.com/17hao/tour-of-go/thrift-gen/tutorial"
 	"github.com/apache/thrift/lib/go/thrift"
-	"shiqihao.xyz/tour-of-go/gen-go/tutorial"
-	"shiqihao.xyz/tour-of-go/rpc/thrift/tutorial/server"
 )
 
 func main() {
