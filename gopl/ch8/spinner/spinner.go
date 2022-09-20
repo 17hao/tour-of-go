@@ -22,18 +22,9 @@ func spinner(delay time.Duration) {
 }
 
 func fibonacci(x int) int {
-	//if x < 2 {
-	//	return x
-	//} else {
-	//	return fibonacci(x - 1) + fibonacci(x - 2)
-	//}
-	return fibTailRecursion(x, 1, 1)
-}
-
-func fibTailRecursion(x, y, z int) int {
-	if x <= 2 {
-		return z
+	if x < 2 {
+		return x
 	} else {
-		return fibTailRecursion(x-1, z, y+z)
+		return fibonacci(x-1) + fibonacci(x-2)
 	}
 }
