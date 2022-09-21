@@ -1,5 +1,3 @@
-// reverberation
-
 package main
 
 import (
@@ -10,11 +8,12 @@ import (
 	"time"
 )
 
+// Echo server simulates the reverberation of a real echo.
 func main() {
-	listener, _ := net.Listen("tcp", "localhost:8888")
+	listener, _ := net.Listen("tcp", "localhost:8000")
 	for {
 		conn, _ := listener.Accept()
-		handleConn3(conn)
+		handleConn(conn)
 	}
 }
 
@@ -26,7 +25,15 @@ func echo(c net.Conn, shout string, delay time.Duration) {
 	fmt.Fprintln(c, "\t", strings.ToLower(shout))
 }
 
-func handleConn3(c net.Conn) {
+func handleConn(c net.Conn) {
+
+	// naive implementation
+	//for {
+	//	buf := make([]byte, 100)
+	//	c.Read(buf)
+	//	echo(c, string(buf), 1*time.Second)
+	//}
+
 	input := bufio.NewScanner(c)
 	for input.Scan() {
 		echo(c, input.Text(), 1*time.Second)

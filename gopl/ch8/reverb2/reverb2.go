@@ -8,15 +8,17 @@ import (
 	"time"
 )
 
+// The echo server in reverb1 doesn't deal with second shout until last shout was petered out.
+// A real echo would consist of the composition of 3 independent shouts.
 func main() {
 	listener, _ := net.Listen("tcp", "localhost:8888")
 	for {
 		conn, _ := listener.Accept()
-		handleConn4(conn)
+		handleConn(conn)
 	}
 }
 
-func echo2(c net.Conn, shout string, delay time.Duration) {
+func echo(c net.Conn, shout string, delay time.Duration) {
 	fmt.Fprintln(c, "\t", strings.ToUpper(shout))
 	time.Sleep(delay)
 	fmt.Fprintln(c, "\t", shout)
@@ -24,10 +26,10 @@ func echo2(c net.Conn, shout string, delay time.Duration) {
 	fmt.Fprintln(c, "\t", strings.ToLower(shout))
 }
 
-func handleConn4(c net.Conn) {
+func handleConn(c net.Conn) {
 	input := bufio.NewScanner(c)
 	for input.Scan() {
-		go echo2(c, input.Text(), 1*time.Second)
+		go echo(c, input.Text(), 1*time.Second)
 	}
 	c.Close()
 }
