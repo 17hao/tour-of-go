@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"strconv"
 
 	"github.com/17hao/tour-of-go/antlr/calc/parser"
@@ -84,18 +83,4 @@ func (visitor *MyCalcVisitor) VisitMulDiv(ctx *parser.MulDivContext) interface{}
 // VisitParens '(' expr ')'
 func (visitor *MyCalcVisitor) VisitParens(ctx *parser.ParensContext) interface{} {
 	return visitor.Visit(ctx.Expr()) // return child expr;s value
-}
-
-func main() {
-	input, err := antlr.NewFileStream(os.Args[1])
-	if err != nil {
-		panic(err)
-	}
-	lexer := parser.NewCalcLexer(input)
-	tokens := antlr.NewCommonTokenStream(lexer, 0)
-	p := parser.NewCalcParser(tokens)
-	tree := p.Prog()
-	println(tree.GetText())
-	eval := NewMyCalcVisitor()
-	eval.Visit(tree)
 }
