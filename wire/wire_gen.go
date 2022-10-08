@@ -9,7 +9,7 @@ import (
 	"fmt"
 )
 
-// Injectors from wire.go:
+// Injectors from tutorial.go:
 
 func InitializeEvent() Event {
 	message := NewMessage()
@@ -18,7 +18,7 @@ func InitializeEvent() Event {
 	return event
 }
 
-// wire.go:
+// tutorial.go:
 
 type Message string
 
