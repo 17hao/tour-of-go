@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	"shiqihao.xyz/tour-of-go/gopl/ch2/tempconv"
+
+	"github.com/17hao/tour-of-go/gopl/ch2/tempconv"
 )
 
 func main() {

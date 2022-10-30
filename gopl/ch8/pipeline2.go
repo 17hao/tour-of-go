@@ -13,7 +13,7 @@ func main() {
 	go func() {
 		for x := 0; x < 100; x++ {
 			naturals <- x
-			time.Sleep(1*time.Second)
+			time.Sleep(1 * time.Second)
 		}
 	}()
 
