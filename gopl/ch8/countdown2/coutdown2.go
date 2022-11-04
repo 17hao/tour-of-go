@@ -9,7 +9,7 @@ import (
 func main() {
 	abort := make(chan struct{})
 	go func() {
-		os.Stdin.Read(make([]byte, 1)) // read a single byte
+		os.Stdin.Read(make([]byte, 1)) // read a single byte from standard input
 		abort <- struct{}{}
 	}()
 

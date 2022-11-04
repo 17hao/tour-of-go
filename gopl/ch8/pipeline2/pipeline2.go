@@ -11,10 +11,11 @@ func main() {
 
 	// Counter
 	go func() {
-		for x := 0; x < 100; x++ {
+		for x := 0; x < 5; x++ {
 			naturals <- x
 			time.Sleep(1 * time.Second)
 		}
+		close(naturals)
 	}()
 
 	// Squarer
@@ -22,6 +23,7 @@ func main() {
 		for x := range naturals {
 			squares <- x * x
 		}
+		close(squares)
 	}()
 
 	// Printer
