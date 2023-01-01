@@ -17,3 +17,5 @@
 .idea
 *.o
 *.s
+
+.DS_Store
