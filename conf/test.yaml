@@ -3,3 +3,12 @@ gopath:
   - /usr/bytedance/go
 goroot:
   - /usr/local/go
+l1: { l2: { l3: value } }
+m1:
+  m2:
+    m3: value
+n1:
+  n2:
+    n3:
+      - v1
+      - v2
