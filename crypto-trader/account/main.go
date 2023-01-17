@@ -13,10 +13,11 @@ import (
 )
 
 func main() {
-	apiKey := "fc1f2844-2739-4262-add7-9a7ffb121446"
-	secretKey := "3D4E9D902DE71DEA200AC7FA577DF764"
+	// TODO read config from local file
+	apiKey := ""
+	secretKey := ""
 	timestamp := time.Now().UTC().Format("2006-01-02T15:04:05.999Z")
-	passphrase := "19961107Sqh@"
+	passphrase := ""
 
 	h := hmac.New(sha256.New, []byte(secretKey))
 	h.Write([]byte(timestamp + "GET" + "/api/v5/account/balance"))
