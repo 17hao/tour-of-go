@@ -5,6 +5,7 @@ go 1.16
 require (
 	github.com/17hao/echo_server v1.0.2
 	github.com/Knetic/govaluate v3.0.0+incompatible
+	github.com/alexmullins/zip v0.0.0-20180717182244-4affb64b04d0 // indirect
 	github.com/antlr/antlr4/runtime/Go/antlr v0.0.0-20220418222510-f25a4f6275ed
 	github.com/apache/thrift v0.16.0
 	github.com/bytedance/sonic v1.0.2

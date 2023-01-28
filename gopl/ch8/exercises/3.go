@@ -7,6 +7,8 @@ import (
 	"os"
 )
 
+// 8.4.1
+//
 // The client program in netcat1 and netcat2 copies the input and sends to the server in main goroutine, the program
 // terminates as soon as the input stream closes, even if the background goroutine is still running.
 //
