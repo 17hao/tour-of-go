@@ -5,7 +5,7 @@
  * these definitions.
  */
 
-namespace go  tutorial
+namespace go tutorial
 
 struct SharedStruct {
   1: i32 key

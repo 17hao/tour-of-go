@@ -45,7 +45,7 @@ include "shared.thrift"
  * Thrift files can namespace, package, or prefix their output in various
  * target languages.
  */
-namespace go  tutorial
+namespace go tutorial
 
 /**
  * Thrift lets you do typedefs to get pretty names for your types. Standard
