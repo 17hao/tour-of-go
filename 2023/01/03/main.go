@@ -6,7 +6,7 @@ import (
 	"runtime/trace"
 )
 
-// go run main.go
+// go run string.go
 // go tool trace trace.out
 func main() {
 	f, err := os.Create("trace.out")
