@@ -18,7 +18,7 @@ func f4() {
 		errChan <- errors.New("err A")
 	}()
 
-	go func(){
+	go func() {
 		defer wg.Done()
 
 		errChan <- errors.New("err B")
@@ -39,7 +39,7 @@ func f5() {
 	wg := sync.WaitGroup{}
 	wg.Add(1)
 
-	go func(){
+	go func() {
 		defer wg.Done()
 
 		println("before")
@@ -51,7 +51,7 @@ func f5() {
 	close(errChan)
 
 	select {
-	case err := <- errChan:
+	case err := <-errChan:
 		println(err)
 	default:
 		println("success")
