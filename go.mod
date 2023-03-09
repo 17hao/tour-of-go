@@ -20,6 +20,7 @@ require (
 	github.com/nyaruka/phonenumbers v1.1.0
 	github.com/pkg/errors v0.9.1
 	github.com/shopspring/decimal v1.3.1
+	github.com/sirupsen/logrus v1.9.0 // indirect
 	github.com/smartystreets/goconvey v1.7.2
 	github.com/spf13/viper v1.10.1
 	github.com/umpc/go-sortedmap v0.0.0-20180422175548-64ab94c482f4
