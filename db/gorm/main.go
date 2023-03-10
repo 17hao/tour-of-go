@@ -6,16 +6,20 @@ import (
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 )
 
 type employee struct {
 	ID   int64
 	Name string
 	City string
+	Age  int64
 }
 
 func main() {
-	db, err := gorm.Open(mysql.Open("shiqihao:123456@tcp(47.102.157.109:3306)/my_db"))
+	db, err := gorm.Open(mysql.Open("shiqihao:123456@tcp(47.102.157.109:3306)/my_db"), &gorm.Config{
+		Logger: logger.Default.LogMode(logger.Info),
+	})
 	if err != nil {
 		panic(err)
 	}
@@ -30,21 +34,35 @@ func main() {
 	//	fmt.Printf("%+v\n", e)
 	//}
 
-	e := query(db)
-	fmt.Printf("%+v\n", e)
+	//e := query(db)
+	//e := queryByID(db)
+	//fmt.Printf("%+v\n", e)
+
+	es := queryByAge(db)
+	fmt.Printf("%+v\n", es)
 }
 
 func query(db *gorm.DB) employee {
 	var e employee
-	sql := db.First(&e, 3000)
-	fmt.Println(sql.Statement.Table)
+	db.First(&e, 3000)
 	return e
+}
+
+func queryByID(db *gorm.DB) employee {
+	var e employee
+	db.Where("id=?", "3").Find(&e)
+	return e
+}
+
+func queryByAge(db *gorm.DB) []employee {
+	var es []employee
+	db.Where("age=?", "10").Find(&es)
+	return es
 }
 
 func queryAll(db *gorm.DB) []employee {
 	var es []employee
 	sql := db.Find(&es)
-	fmt.Println(sql.Statement.Table)
 	err := sql.Error
 	if err != nil {
 		log.Fatalf("%+v\n", err)
@@ -61,31 +79,4 @@ func queryByRawSQL(db *gorm.DB) []employee {
 
 	db.Raw("select id, name, city from employees where id > ?", 1).Scan(&es)
 	return es
-
-	//db.Raw("select id, name, city from employees where id = ?", 9).Scan(&e)
-	//fmt.Printf("e=%+v\n", e)
-	//
-	//db.Raw("select * from employees").Scan(&es)
-	//for _, e := range es {
-	//	fmt.Printf("%+v\n", e)
-	//}
-
-	//db.First(&e)
-	//fmt.Printf("%+v\n", e)
-
-	//db.Last(&e)
-	//fmt.Printf("%+v\n", e)
-	//
-	//db.Find(&es)
-	//for _, e := range es {
-	//	fmt.Printf("%+v\n", e)
-	//}
-
-	//db.Where("city <> ?", "Shanghai").First(&e)
-	//fmt.Printf("e = %+v\n", e)
-
-	//db.Where("city <> ?", "Shanghai").Find(&es)
-	//for _, i := range es {
-	//	fmt.Printf("%+v\n", i)
-	//}
 }
