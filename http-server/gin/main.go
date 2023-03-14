@@ -13,15 +13,18 @@ import (
 func main() {
 	initDB()
 
-	server := gin.New()
-	server.Use(
-		gin.LoggerWithWriter(gin.DefaultWriter, "/accounts/300"),
+	router := gin.New()
+	router.Use(
 		gin.Recovery(),
 	)
-	server.GET("/accounts", getAllAccounts)
-	server.GET("/accounts/:id", getAccountByID)
-	server.PUT("/accounts/:id", updateAccountByID)
-	err := server.Run(":9000")
+	router.GET("/accounts", getAllAccounts)
+	router.GET("/accounts/:id", getAccountByID)
+	router.PUT("/accounts/:id", updateAccountByID)
+	srv := &http.Server{
+		Addr:    ":9000",
+		Handler: router,
+	}
+	err := srv.ListenAndServe()
 	if err != nil {
 		panic(err)
 	}

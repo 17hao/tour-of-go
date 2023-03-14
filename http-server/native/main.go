@@ -4,12 +4,8 @@ import (
 	"encoding/json"
 	"errors"
 	"net/http"
-	"os"
-	"os/signal"
-	"runtime/pprof"
 	"strconv"
 	"strings"
-	"syscall"
 
 	"github.com/sirupsen/logrus"
 	"gorm.io/driver/mysql"
@@ -56,32 +52,6 @@ func getAccountByID(id int64) (account, error) {
 }
 
 func main() {
-	cpuProfFile, err := os.Create("cpu.prof")
-	if err != nil {
-		logrus.Error(err)
-		return
-	}
-	pprof.StartCPUProfile(cpuProfFile)
-	defer pprof.StopCPUProfile()
-	c := make(chan os.Signal, 2)
-	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
-	onKill := func(c chan os.Signal) {
-		select {
-		case <-c:
-			defer cpuProfFile.Close()
-			defer pprof.StopCPUProfile()
-			defer os.Exit(0)
-		}
-	}
-	go onKill(c)
-
-	heapProfFile, err := os.Create("heap.prof")
-	if err != nil {
-		logrus.Error(err)
-		return
-	}
-	pprof.WriteHeapProfile(heapProfFile)
-
 	initDB()
 
 	h1 := func(w http.ResponseWriter, req *http.Request) {
@@ -124,9 +94,4 @@ func main() {
 		w.Write(accountBytes)
 	}
 	http.HandleFunc("/accounts/", h2)
-
-	err = http.ListenAndServe("localhost:9000", nil)
-	if err != nil {
-		logrus.Error(err)
-	}
 }
