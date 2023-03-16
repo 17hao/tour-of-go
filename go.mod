@@ -24,6 +24,7 @@ require (
 	github.com/smartystreets/goconvey v1.7.2
 	github.com/spf13/viper v1.10.1
 	github.com/umpc/go-sortedmap v0.0.0-20180422175548-64ab94c482f4
+	go.mongodb.org/mongo-driver v1.11.2
 	golang.org/x/text v0.3.7
 	gorm.io/driver/mysql v1.4.4
 	gorm.io/gorm v1.24.5
