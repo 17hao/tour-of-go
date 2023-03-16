@@ -10,6 +10,9 @@ func main() {
 	for i, r := range str {
 		fmt.Printf("%d\t%q\t%d\n", i, r, r)
 	}
+	for i := 0; i < len(str); i++ {
+		fmt.Printf("%q ", str[i])
+	}
 
 	m := map[interface{}]int{
 		'*': 1,
