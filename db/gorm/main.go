@@ -40,6 +40,8 @@ func main() {
 
 	es := queryByAge(db)
 	fmt.Printf("%+v\n", es)
+
+	updateTimestamp(db)
 }
 
 func query(db *gorm.DB) employee {
@@ -79,4 +81,11 @@ func queryByRawSQL(db *gorm.DB) []employee {
 
 	db.Raw("select id, name, city from employees where id > ?", 1).Scan(&es)
 	return es
+}
+
+func updateTimestamp(db *gorm.DB) {
+	err := db.Exec("update time_table set timestamp_1 = ? where id = 1", "2023-03-01 10:00:00").Error
+	if err != nil {
+		log.Fatal(err)
+	}
 }
