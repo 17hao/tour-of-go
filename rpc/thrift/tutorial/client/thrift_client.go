@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"log"
 
 	"github.com/17hao/tour-of-go/thrift-gen/tutorial"
 	"github.com/apache/thrift/lib/go/thrift"
@@ -19,15 +20,20 @@ func main() {
 }
 
 func newClient(addr string) (*tutorial.CalculatorClient, error) {
-	transportFactory := thrift.NewTFramedTransportFactoryConf(thrift.NewTTransportFactory(), &thrift.TConfiguration{})
-	protocolFactory := thrift.NewTBinaryProtocolFactoryConf(&thrift.TConfiguration{})
+	//transportFactory := thrift.NewTFramedTransportFactoryConf(thrift.NewTTransportFactory(), &thrift.TConfiguration{})
+	//protocolFactory := thrift.NewTBinaryProtocolFactoryConf(&thrift.TConfiguration{})
+	//socket := thrift.NewTSocketConf(addr, &thrift.TConfiguration{})
 
-	socket := thrift.NewTSocketConf(addr, &thrift.TConfiguration{})
+	transportFactory := thrift.NewTTransportFactory()
+	protocolFactory := thrift.NewTBinaryProtocolFactoryDefault()
+	socket, err := thrift.NewTSocket(addr)
+	if err != nil {
+		log.Fatal(err)
+	}
 	transport, err := transportFactory.GetTransport(socket)
 	if err != nil {
 		return nil, err
 	}
-
 	if err = transport.Open(); err != nil {
 		return nil, err
 	}

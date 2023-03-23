@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# thrift 0.15.0
+# thrift 0.13.0
 if [ ! -d thrift-gen ]; then
   mkdir thrift-gen
 fi
