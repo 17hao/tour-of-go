@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"net/http"
 	"strconv"
 	"time"
 )
@@ -46,17 +47,21 @@ func f2(ctx context.Context) {
 }
 
 func ctxDone() {
-	ctx := context.Background()
-	ctx, cancel := context.WithCancel(ctx)
-	f3(ctx)
-	defer cancel()
+	http.HandleFunc("/hello", hello)
+	http.ListenAndServe(":9000", nil)
 }
 
-func f3(ctx context.Context) {
+func hello(w http.ResponseWriter, req *http.Request) {
+	ctx := req.Context()
+	fmt.Println("server: hello handler started")
+	defer fmt.Println("server: hello handler ended")
+
 	select {
-	case <- ctx.Done():
-		fmt.Println("context done")
-	default:
-		fmt.Println("default")
+	case <-time.After(5 * time.Second):
+		fmt.Fprintf(w, "hello\n")
+	case <-ctx.Done():
+		err := ctx.Err()
+		fmt.Println("server: ", err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 }
