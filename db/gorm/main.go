@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"log"
 
+	"github.com/sirupsen/logrus"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -38,10 +38,16 @@ func main() {
 	//e := queryByID(db)
 	//fmt.Printf("%+v\n", e)
 
+	fmt.Printf("%+v\n", queryByIDs(db))
+
+	fmt.Printf("%+v\n", queryByID(db))
+
 	es := queryByAge(db)
 	fmt.Printf("%+v\n", es)
 
 	updateTimestamp(db)
+
+	deleteByID(db, 30000)
 }
 
 func query(db *gorm.DB) employee {
@@ -50,9 +56,22 @@ func query(db *gorm.DB) employee {
 	return e
 }
 
-func queryByID(db *gorm.DB) employee {
-	var e employee
-	db.Where("id=?", "3").Find(&e)
+func queryByIDs(db *gorm.DB) []employee {
+	var es []employee
+	db.Where("id > ?", "100").Find(&es)
+	logrus.Info(db.RowsAffected)
+	if db.Error != nil {
+		logrus.Error(db.Error)
+	}
+	return es
+}
+
+func queryByID(db *gorm.DB) *employee {
+	e := &employee{}
+	//if err := db.Where("id=?", "30000").Order("id").Limit(1).Find(&e).Error; err != nil {
+	if err := db.Where("id=?", "30000").First(e).Error; err != nil {
+		logrus.Printf("%+v\n", err)
+	}
 	return e
 }
 
@@ -67,7 +86,7 @@ func queryAll(db *gorm.DB) []employee {
 	sql := db.Find(&es)
 	err := sql.Error
 	if err != nil {
-		log.Fatalf("%+v\n", err)
+		logrus.Fatalf("%+v\n", err)
 	}
 	for _, e := range es {
 		fmt.Printf("%+v\n", e)
@@ -84,8 +103,12 @@ func queryByRawSQL(db *gorm.DB) []employee {
 }
 
 func updateTimestamp(db *gorm.DB) {
-	err := db.Exec("update time_table set timestamp_1 = ? where id = 1", "2023-03-01 10:00:00").Error
+	err := db.Exec("update time_table set timestamp_1 = ? where id = 10000", "2023-03-01 10:00:00").Error
 	if err != nil {
-		log.Fatal(err)
+		logrus.Fatal(err)
 	}
+}
+
+func deleteByID(db *gorm.DB, id int64) {
+	db.Where("id = ?", id).Delete(&employee{})
 }
