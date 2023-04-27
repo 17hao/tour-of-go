@@ -2,17 +2,18 @@ package main
 
 import (
 	"errors"
-	"fmt"
 
 	"github.com/sirupsen/logrus"
 )
 
 func main() {
-	if err := f1(); err != nil {
-		logrus.Error(err)
-	}
+	//if err := f1(); err != nil {
+	//	logrus.Error(err)
+	//}
+	//
+	//fmt.Printf("%+v\n", append(f5(), f6()...))
 
-	fmt.Printf("%+v\n", append(f5(), f6()...))
+	tokenized()
 }
 
 func f1() (err error) {
