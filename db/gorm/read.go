@@ -58,3 +58,15 @@ func queryByRawSQL(db *gorm.DB) []employee {
 	db.Raw("select id, name, city from employees where id > ?", 1).Scan(&es)
 	return es
 }
+
+func queryID(db *gorm.DB) []int64 {
+	var res []int64
+	sql := db.Model(&employee{}).Select("id").Order("id").Find(&res)
+	logrus.Info(sql.Statement.SQL.String())
+	logrus.Info(db.DryRun)
+	err := sql.Error
+	if err != nil {
+		logrus.Fatalf("%+v\n", err)
+	}
+	return res
+}

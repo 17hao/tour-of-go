@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/sirupsen/logrus"
+	"fmt"
 )
 
 func main() {
@@ -11,23 +11,26 @@ func main() {
 	//
 	// fmt.Printf("%+v\n", queryByID(db))
 	//
-	// es := queryByAge(db)
+	// es := queryByAge(db)¬
 	// fmt.Printf("%+v\n", es)
 	//
 	// updateTimestamp(db)
 	//
 	// deleteByID(db, 30000)
 
-	employees := []employee{
-		{
-			Name: "20230423-1",
-		},
-		{
-			Name: "20230423-2",
-		},
-	}
-	err := createEmployees(db, employees)
-	if err != nil {
-		logrus.Error(err)
-	}
+	// employees := []employee{
+	// 	{
+	// 		Name: "20230423-1",
+	// 	},
+	// 	{
+	// 		Name: "20230423-2",
+	// 	},
+	// }
+	// err := createEmployees(db, employees)
+	// if err != nil {
+	// 	logrus.Error(err)
+	// }
+
+	ids := queryID(db)
+	fmt.Printf("%+v", ids)
 }
