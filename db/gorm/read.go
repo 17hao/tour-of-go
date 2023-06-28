@@ -15,7 +15,8 @@ func query(db *gorm.DB) employee {
 
 func queryByIDs(db *gorm.DB) []employee {
 	var es []employee
-	db.Where("id > ?", "100").Find(&es)
+	db.Model(&employee{}).Where("id in ?", []int64{1, 2}).Find(&es)
+	// db.Where("id > ?", "100").Find(&es)
 	logrus.Info(db.RowsAffected)
 	if db.Error != nil {
 		logrus.Error(db.Error)
@@ -68,5 +69,23 @@ func queryID(db *gorm.DB) []int64 {
 	if err != nil {
 		logrus.Fatalf("%+v\n", err)
 	}
+	return res
+}
+
+func queryFirstID(db *gorm.DB) *employee {
+	res := &employee{}
+
+	dryRun := db.Session(&gorm.Session{DryRun: true}).Where("id >= ?", 1).Order("id").First(res)
+	logrus.Info(dryRun.Statement.SQL.String())
+
+	err := db.Session(&gorm.Session{DryRun: true}).Where("id >= ?", 1).Order("id").First(res).Error
+	if err != nil {
+		logrus.Error(err)
+		return nil
+	}
+	// sql := db.ToSQL(func(tx *gorm.DB) *gorm.DB {
+	// 	return db.Order("id").First(res)
+	// })
+	// logrus.Info(sql)
 	return res
 }

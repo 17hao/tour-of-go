@@ -31,6 +31,11 @@ func main() {
 	// 	logrus.Error(err)
 	// }
 
-	ids := queryID(db)
-	fmt.Printf("%+v", ids)
+	// ids := queryID(db)
+	// fmt.Printf("%+v", ids)
+	//
+	// err := createEmployee(db, employee{ID: 1, Name: "test"})
+	// fmt.Printf("%v", err)
+
+	fmt.Printf("%+v", queryByIDs(db))
 }
