@@ -11,3 +11,10 @@ func updateTimestamp(db *gorm.DB) {
 		logrus.Fatal(err)
 	}
 }
+
+func updateName(db *gorm.DB) {
+	err := db.Table("employees").Where("id = ?", 1).Update("name", "new-name").Error
+	if err != nil {
+		logrus.Fatal(err)
+	}
+}

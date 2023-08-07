@@ -27,7 +27,7 @@ func queryByIDs(db *gorm.DB) []employee {
 func queryByID(db *gorm.DB) *employee {
 	e := &employee{}
 	// if err := db.Where("id=?", "30000").Order("id").Limit(1).Find(&e).Error; err != nil {
-	if err := db.Where("id=?", "30000").First(e).Error; err != nil {
+	if err := db.Table("employees").Where("id=?", "1").First(e).Error; err != nil {
 		logrus.Printf("%+v\n", err)
 	}
 	return e
@@ -87,5 +87,21 @@ func queryFirstID(db *gorm.DB) *employee {
 	// 	return db.Order("id").First(res)
 	// })
 	// logrus.Info(sql)
+	return res
+}
+
+func Paginate(db *gorm.DB, limit int, offset int) []employee {
+	res := make([]employee, 0)
+	err := db.Order("id").Limit(limit).Offset(offset).Find(&res).Error
+	if err != nil {
+		logrus.Error(err)
+	}
+	return res
+}
+
+func queryMultiWhere(db *gorm.DB) []employee {
+	res := make([]employee, 0)
+
+	db.Where("id >= ?", 1).Where("name like 'tx%'").Find(&res)
 	return res
 }

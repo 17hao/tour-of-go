@@ -4,7 +4,6 @@ go 1.17
 
 require (
 	github.com/17hao/echo_server v1.0.2
-	github.com/DATA-DOG/go-sqlmock v1.5.0
 	github.com/Knetic/govaluate v3.0.0+incompatible
 	github.com/antlr/antlr4/runtime/Go/antlr v0.0.0-20220418222510-f25a4f6275ed
 	github.com/apache/thrift v0.13.0
@@ -16,6 +15,7 @@ require (
 	github.com/gin-gonic/gin v1.7.7
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/google/wire v0.5.0
+	github.com/json-iterator/go v1.1.12
 	github.com/magiconair/properties v1.8.5
 	github.com/nyaruka/phonenumbers v1.1.0
 	github.com/pkg/errors v0.9.1
@@ -55,7 +55,6 @@ require (
 	github.com/jhump/protoreflect v1.8.2 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
-	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/jtolds/gls v4.20.0+incompatible // indirect
 	github.com/klauspost/compress v1.13.6 // indirect
 	github.com/klauspost/cpuid/v2 v2.1.0 // indirect

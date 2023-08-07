@@ -11,6 +11,7 @@ func initDB() *gorm.DB {
 		Logger: logger.Default.LogMode(logger.Info),
 	})
 	if err != nil {
+		// logrus.Errorf("gorm.Open failed, err=%v, stack=%s", err, string(debug.Stack()))
 		panic(err)
 	}
 	return db
