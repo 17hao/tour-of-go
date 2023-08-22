@@ -58,6 +58,9 @@ func main() {
 	// db.Raw("select * from employees").Count(&count)
 	// fmt.Printf("%d", count)
 	//
-	res := queryByID(db)
+	// res := queryByID(db)
+	// fmt.Printf("%+v", res)
+
+	res := queryMaxAge(db)
 	fmt.Printf("%+v", res)
 }

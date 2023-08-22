@@ -3,9 +3,10 @@ package main
 import (
 	"context"
 	"fmt"
+	"time"
+
 	"github.com/redis/go-redis/v9"
 	"github.com/sirupsen/logrus"
-	"time"
 )
 
 func main() {
@@ -46,9 +47,15 @@ func main() {
 	}
 	fmt.Printf("%v\n", v4)
 
-	v5, err := rdb.ZRange(ctx, "zset1", 0, -1).Result()
+	v5, err := rdb.ZRange(ctx, "zset2", 0, -1).Result()
 	if err != nil {
 		logrus.Errorf("%v", err)
 	}
 	fmt.Printf("%v\n", v5)
+
+	v6, err := rdb.ZScore(ctx, "zset1", "xyz").Result()
+	if err != nil {
+		logrus.Errorf("%v", err)
+	}
+	fmt.Printf("%v\n", v6)
 }

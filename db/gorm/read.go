@@ -105,3 +105,18 @@ func queryMultiWhere(db *gorm.DB) []employee {
 	db.Where("id >= ?", 1).Where("name like 'tx%'").Find(&res)
 	return res
 }
+
+func queryMaxAge(db *gorm.DB) []employee {
+	res := make([]struct {
+		City string
+		Age  int64 `gorm:"column:max(age)"`
+	}, 2)
+
+	cities := []string{"Hangzhou", "Beijing"}
+	db.Table("employees").Select("city, max(age)").Where("city in ?", cities).Group("city").Find(&res)
+	employees := make([]employee, 0)
+	for _, r := range res {
+		employees = append(employees, employee{City: r.City, Age: r.Age})
+	}
+	return employees
+}
