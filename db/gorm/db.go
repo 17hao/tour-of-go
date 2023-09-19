@@ -7,7 +7,7 @@ import (
 )
 
 func initDB() *gorm.DB {
-	db, err := gorm.Open(mysql.Open("shiqihao:123456@tcp(localhost:3306)/my_db"), &gorm.Config{
+	db, err := gorm.Open(mysql.Open("shiqihao:123456@tcp(localhost:3306)/my_db?loc=Local"), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Info),
 	})
 	if err != nil {

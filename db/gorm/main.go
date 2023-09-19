@@ -1,8 +1,8 @@
 package main
 
 import (
-	"fmt"
 	"runtime/debug"
+	"time"
 
 	"github.com/sirupsen/logrus"
 )
@@ -28,10 +28,9 @@ func main() {
 
 	// employees := []employee{
 	// 	{
-	// 		Name: "20230423-1",
-	// 	},
-	// 	{
-	// 		Name: "20230423-2",
+	// 		Name:        "2023-0917-1",
+	// 		CreatedAt:   time.Now(),
+	// 		PhoneNumber: "123",
 	// 	},
 	// }
 	// err := createEmployees(db, employees)
@@ -39,6 +38,15 @@ func main() {
 	// 	logrus.Error(err)
 	// }
 
+	e := employee{
+		Name:        "2023-0917-2",
+		CreatedAt:   time.Now(),
+		PhoneNumber: "1234",
+	}
+	err := createOrUpdateOnDup(db, e, "2023-0917-1-new")
+	if err != nil {
+		logrus.Error(err)
+	}
 	// ids := queryID(db)
 	// fmt.Printf("%+v", ids)
 	//
@@ -61,6 +69,6 @@ func main() {
 	// res := queryByID(db)
 	// fmt.Printf("%+v", res)
 
-	res := queryMaxAge(db)
-	fmt.Printf("%+v", res)
+	// res := queryByID(db)
+	// fmt.Printf("%+v", res)
 }

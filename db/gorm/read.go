@@ -26,8 +26,10 @@ func queryByIDs(db *gorm.DB) []employee {
 
 func queryByID(db *gorm.DB) *employee {
 	e := &employee{}
-	// if err := db.Where("id=?", "30000").Order("id").Limit(1).Find(&e).Error; err != nil {
-	if err := db.Table("employees").Where("id=?", "1").First(e).Error; err != nil {
+	sql := db.Limit(1)
+	sql = sql.Order("id")
+	if err := sql.Where("id=?", "1").Find(&e).Error; err != nil {
+		// if err := db.Table("employees").Where("id=?", "1").First(e).Error; err != nil {
 		logrus.Printf("%+v\n", err)
 	}
 	return e
