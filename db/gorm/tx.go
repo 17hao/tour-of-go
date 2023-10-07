@@ -8,7 +8,7 @@ import (
 )
 
 func tx1(db *gorm.DB, e employee) {
-	err := db.Transaction(func(tx *gorm.DB) error {
+	err := getLocalDB().Transaction(func(tx *gorm.DB) error {
 		if err := tx.Create(&e).Error; err != nil {
 			return err
 		}
@@ -21,8 +21,8 @@ func tx1(db *gorm.DB, e employee) {
 }
 
 func tx2(db *gorm.DB, e employee) {
-	err := db.Transaction(func(tx *gorm.DB) error {
-		if err := db.Create(&e).Error; err != nil {
+	err := getLocalDB().Transaction(func(tx *gorm.DB) error {
+		if err := getLocalDB().Create(&e).Error; err != nil {
 			return err
 		}
 		time.Sleep(1 * time.Minute)
@@ -34,7 +34,7 @@ func tx2(db *gorm.DB, e employee) {
 }
 
 func tx3(db *gorm.DB, e employee) {
-	tx := db.Begin()
+	tx := getLocalDB().Begin()
 	err := tx.Create(&e).Error
 	defer func(error) {
 		if err != nil {
@@ -45,7 +45,7 @@ func tx3(db *gorm.DB, e employee) {
 }
 
 func tx4(db *gorm.DB, e []*employee) {
-	tx := db.Begin()
+	tx := getLocalDB().Begin()
 	err := tx.Create(&e).Error
 	defer func(error) {
 		if err != nil {

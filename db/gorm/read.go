@@ -7,43 +7,42 @@ import (
 	"gorm.io/gorm"
 )
 
-func query(db *gorm.DB) employee {
+func query() employee {
 	var e employee
-	db.First(&e, 3000)
+	getLocalDB().First(&e, 3000)
 	return e
 }
 
-func queryByIDs(db *gorm.DB) []employee {
+func queryByIDs(ids []int64) ([]employee, error) {
 	var es []employee
-	db.Model(&employee{}).Where("id in ?", []int64{1, 2}).Find(&es)
-	// db.Where("id > ?", "100").Find(&es)
-	logrus.Info(db.RowsAffected)
-	if db.Error != nil {
-		logrus.Error(db.Error)
+	res := getLocalDB().Model(&employee{}).Where("id in ?", ids).Find(&es)
+	logrus.Info(getLocalDB().RowsAffected)
+	if res.Error != nil {
+		return nil, res.Error
 	}
-	return es
+	return es, nil
 }
 
-func queryByID(db *gorm.DB) *employee {
+func queryByID() *employee {
 	e := &employee{}
-	sql := db.Limit(1)
+	sql := getLocalDB().Limit(1)
 	sql = sql.Order("id")
 	if err := sql.Where("id=?", "1").Find(&e).Error; err != nil {
-		// if err := db.Table("employees").Where("id=?", "1").First(e).Error; err != nil {
+		// if err := getLocalDB().Table("employees").Where("id=?", "1").First(e).Error; err != nil {
 		logrus.Printf("%+v\n", err)
 	}
 	return e
 }
 
-func queryByAge(db *gorm.DB) []employee {
+func queryByAge() []employee {
 	var es []employee
-	db.Where("age=?", "10").Find(&es)
+	getLocalDB().Where("age=?", "10").Find(&es)
 	return es
 }
 
-func queryAll(db *gorm.DB) []employee {
+func queryAll() []employee {
 	var es []employee
-	sql := db.Find(&es)
+	sql := getLocalDB().Find(&es)
 	err := sql.Error
 	if err != nil {
 		logrus.Fatalf("%+v\n", err)
@@ -54,19 +53,19 @@ func queryAll(db *gorm.DB) []employee {
 	return es
 }
 
-func queryByRawSQL(db *gorm.DB) []employee {
+func queryByRawSQL() []employee {
 	// var e employee
 	var es []employee
 
-	db.Raw("select id, name, city from employees where id > ?", 1).Scan(&es)
+	getLocalDB().Raw("select id, name, city from employees where id > ?", 1).Scan(&es)
 	return es
 }
 
-func queryID(db *gorm.DB) []int64 {
+func queryID() []int64 {
 	var res []int64
-	sql := db.Model(&employee{}).Select("id").Order("id").Find(&res)
+	sql := getLocalDB().Model(&employee{}).Select("id").Order("id").Find(&res)
 	logrus.Info(sql.Statement.SQL.String())
-	logrus.Info(db.DryRun)
+	logrus.Info(getLocalDB().DryRun)
 	err := sql.Error
 	if err != nil {
 		logrus.Fatalf("%+v\n", err)
@@ -74,19 +73,19 @@ func queryID(db *gorm.DB) []int64 {
 	return res
 }
 
-func queryFirstID(db *gorm.DB) *employee {
+func queryFirstID() *employee {
 	res := &employee{}
 
-	dryRun := db.Session(&gorm.Session{DryRun: true}).Where("id >= ?", 1).Order("id").First(res)
+	dryRun := getLocalDB().Session(&gorm.Session{DryRun: true}).Where("id >= ?", 1).Order("id").First(res)
 	logrus.Info(dryRun.Statement.SQL.String())
 
-	err := db.Session(&gorm.Session{DryRun: true}).Where("id >= ?", 1).Order("id").First(res).Error
+	err := getLocalDB().Session(&gorm.Session{DryRun: true}).Where("id >= ?", 1).Order("id").First(res).Error
 	if err != nil {
 		logrus.Error(err)
 		return nil
 	}
-	// sql := db.ToSQL(func(tx *gorm.DB) *gorm.DB {
-	// 	return db.Order("id").First(res)
+	// sql := getLocalDB().ToSQL(func(tx *gorm.DB) *gorm.DB {
+	// 	return getLocalDB().Order("id").First(res)
 	// })
 	// logrus.Info(sql)
 	return res
@@ -94,28 +93,28 @@ func queryFirstID(db *gorm.DB) *employee {
 
 func Paginate(db *gorm.DB, limit int, offset int) []employee {
 	res := make([]employee, 0)
-	err := db.Order("id").Limit(limit).Offset(offset).Find(&res).Error
+	err := getLocalDB().Order("id").Limit(limit).Offset(offset).Find(&res).Error
 	if err != nil {
 		logrus.Error(err)
 	}
 	return res
 }
 
-func queryMultiWhere(db *gorm.DB) []employee {
+func queryMultiWhere() []employee {
 	res := make([]employee, 0)
 
-	db.Where("id >= ?", 1).Where("name like 'tx%'").Find(&res)
+	getLocalDB().Where("id >= ?", 1).Where("name like 'tx%'").Find(&res)
 	return res
 }
 
-func queryMaxAge(db *gorm.DB) []employee {
+func queryMaxAge() []employee {
 	res := make([]struct {
 		City string
 		Age  int64 `gorm:"column:max(age)"`
 	}, 2)
 
 	cities := []string{"Hangzhou", "Beijing"}
-	db.Table("employees").Select("city, max(age)").Where("city in ?", cities).Group("city").Find(&res)
+	getLocalDB().Table("employees").Select("city, max(age)").Where("city in ?", cities).Group("city").Find(&res)
 	employees := make([]employee, 0)
 	for _, r := range res {
 		employees = append(employees, employee{City: r.City, Age: r.Age})

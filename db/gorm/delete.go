@@ -5,5 +5,5 @@ import (
 )
 
 func deleteByID(db *gorm.DB, id int64) {
-	db.Where("id = ?", id).Delete(&employee{})
+	getLocalDB().Where("id = ?", id).Delete(&employee{})
 }
