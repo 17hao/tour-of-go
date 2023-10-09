@@ -1,6 +1,6 @@
 module github.com/17hao/tour-of-go
 
-go 1.17
+go 1.18
 
 require (
 	github.com/17hao/echo_server v1.0.2

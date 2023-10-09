@@ -12,6 +12,12 @@ var showCommand = &cli.Command{
 	Name:      "show",
 	Usage:     "print options or args",
 	UsageText: "my-cli show [--local[=<value>]] [<args>]",
+	Flags: []cli.Flag{
+		&cli.StringFlag{
+			Name: "local",
+			Value: "default value",
+		},
+	},
 	Action: func(context *cli.Context) error {
 		switch context.Args().First() {
 		case "options":
@@ -19,7 +25,7 @@ var showCommand = &cli.Command{
 		case "args":
 			fmt.Printf("args: %+v\n", context.Args().Slice())
 		default:
-			fmt.Printf("my-cli show [--local[=<value>]] [<args>]\n")
+			fmt.Printf("usage: my-cli show [--local[=<value>]] [<args>]\n")
 		}
 		return nil
 	},
