@@ -25,6 +25,7 @@ require (
 	github.com/smartystreets/goconvey v1.7.2
 	github.com/spf13/viper v1.10.1
 	github.com/umpc/go-sortedmap v0.0.0-20180422175548-64ab94c482f4
+	github.com/urfave/cli/v2 v2.25.7
 	go.mongodb.org/mongo-driver v1.11.2
 	golang.org/x/text v0.3.7
 	gorm.io/driver/mysql v1.4.4
@@ -41,6 +42,7 @@ require (
 	github.com/cloudwego/frugal v0.1.3 // indirect
 	github.com/cloudwego/netpoll v0.3.1 // indirect
 	github.com/cloudwego/thriftgo v0.2.4 // indirect
+	github.com/cpuguy83/go-md2man/v2 v2.0.2 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/fsnotify/fsnotify v1.5.1 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
@@ -67,6 +69,7 @@ require (
 	github.com/montanaflynn/stats v0.0.0-20171201202039-1bf9dbcd8cbe // indirect
 	github.com/oleiade/lane v1.0.1 // indirect
 	github.com/pelletier/go-toml v1.9.4 // indirect
+	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/smartystreets/assertions v1.2.0 // indirect
 	github.com/spf13/afero v1.6.0 // indirect
 	github.com/spf13/cast v1.4.1 // indirect
@@ -81,6 +84,7 @@ require (
 	github.com/xdg-go/pbkdf2 v1.0.0 // indirect
 	github.com/xdg-go/scram v1.1.1 // indirect
 	github.com/xdg-go/stringprep v1.0.3 // indirect
+	github.com/xrash/smetrics v0.0.0-20201216005158-039620a65673 // indirect
 	github.com/youmark/pkcs8 v0.0.0-20181117223130-1be2e3e5546d // indirect
 	golang.org/x/arch v0.0.0-20220722155209-00200b7164a7 // indirect
 	golang.org/x/crypto v0.0.0-20220622213112-05595931fe9d // indirect
