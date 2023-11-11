@@ -56,7 +56,7 @@ func child() {
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
-	cmd.Env = []string{"PS1=-[native-container]- # "}
+	cmd.Env = []string{"PS1=-[naive-container]- # "}
 	if err := cmd.Run(); err != nil {
 		logrus.WithField("stack", string(debug.Stack())).Errorf("ERR: %v", err)
 		return
