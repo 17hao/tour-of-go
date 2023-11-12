@@ -37,6 +37,7 @@ func run() {
 
 func child() {
 	logrus.Infof("child process pid=%d", os.Getpid())
+	must(syscall.Sethostname([]byte("container-1")))
 
 	rootfs := "/tmp/rootfs"
 	proc := filepath.Join(rootfs, "/proc")
