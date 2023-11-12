@@ -79,8 +79,8 @@ func child() {
 }
 
 // su
-// go build -o naive-container main.go
-// ./naive-container run
+// go build main.go
+// ./main run
 func main() {
 	logrus.Infof("os.Args: %+v", os.Args)
 	switch os.Args[1] {
