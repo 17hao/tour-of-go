@@ -19,6 +19,9 @@ func must(err error) {
 // Create new process in shell: (sleep 5; printf "bye") &
 // pstree -apT
 // monitor the thread count of a process: ps -o thcount <pid>
+//
+// https://docs.kernel.org/admin-guide/cgroup-v2.html#pid
+// Note that PIDs used in this controller refer to TIDs, process IDs as used by the kernel.
 func main() {
 	cgorupRoot := "/sys/fs/cgroup"
 	systemSlice := filepath.Join(cgorupRoot, "system.slice")
