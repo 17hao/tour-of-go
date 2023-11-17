@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/sirupsen/logrus"
 	"gorm.io/gorm"
@@ -11,6 +12,23 @@ func query() employee {
 	var e employee
 	getLocalDB().First(&e, 3000)
 	return e
+}
+
+func queryByName(name string) (*employee, error) {
+	res := &employee{}
+	if err := getLocalDB().Where("name = ?", name).First(res).Error; err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+
+func queryByTimeRange(startAt time.Time) ([]*employee, error) {
+	res := make([]*employee, 0)
+	err := getLocalDB().Where("created_at < ?", startAt).Find(&res).Error
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
 }
 
 func queryByIDs(ids []int64) ([]employee, error) {

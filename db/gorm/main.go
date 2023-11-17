@@ -15,17 +15,26 @@ func main() {
 	}()
 
 	// ======== create ========
-	// if err := create(&employee{ID: 1, Name: "2023-10-07-1"}); err != nil {
+	// if err := create(&employee{ID: 1, Name: "2023-10-19-1"}); err != nil {
 	// 	logrus.Error(err)
 	// }
 
 	// ======== read ========
-	res, err := queryByIDs([]int64{1})
+	res, err := queryByName("a; drop table users")
 	if err != nil {
 		logrus.Error(err)
 	} else {
 		fmt.Printf("%+v", res)
 	}
+
+	// res, err := queryByTimeRange(time.Now())
+	// if err != nil {
+	// 	logrus.Error(err)
+	// } else {
+	// 	for _, e := range res {
+	// 		fmt.Printf("%+v\n", e)
+	// 	}
+	// }
 
 	// ======== update ========
 

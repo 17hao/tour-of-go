@@ -11,7 +11,7 @@ var db *gorm.DB
 func initLocalDB() {
 	var err error
 	// https://github.com/go-sql-driver/mysql#timetime-support
-	db, err = gorm.Open(mysql.Open("shiqihao:123456@tcp(localhost:3306)/my_db?loc=Local&parseTime=true"), &gorm.Config{
+	db, err = gorm.Open(mysql.Open("admin:123456@tcp(localhost:3306)/my_db?loc=Local&parseTime=true"), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Info),
 	})
 	if err != nil {

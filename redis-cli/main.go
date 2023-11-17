@@ -3,10 +3,11 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"github.com/sirupsen/logrus"
 	"net"
 	"os"
 	"time"
+
+	"github.com/sirupsen/logrus"
 )
 
 func main() {

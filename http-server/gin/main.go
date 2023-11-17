@@ -34,11 +34,11 @@ var db *gorm.DB
 
 func initDB() {
 	var err error
-	db, err = gorm.Open(mysql.Open("shiqihao:123456@tcp(47.102.157.109:3306)/my_db"), &gorm.Config{
+	db, err = gorm.Open(mysql.Open("admin:123456@tcp(localhost:13306)/my_db"), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Error),
 	})
 	if err != nil {
-		logrus.Error(err)
+		panic(err)
 	}
 }
 
