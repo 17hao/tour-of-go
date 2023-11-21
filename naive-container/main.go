@@ -6,6 +6,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"runtime/debug"
+	"strconv"
 	"syscall"
 
 	"github.com/sirupsen/logrus"
@@ -17,13 +18,29 @@ func must(err error) {
 	}
 }
 
+func cg() {
+	newCgroup := "/sys/fs/cgroup/system.slice/naive-container.service"
+	if _, err := os.Stat(newCgroup); errors.Is(err, os.ErrNotExist) {
+		must(os.Mkdir(newCgroup, 0700))
+	}
+	must(os.WriteFile(filepath.Join(newCgroup, "pids.max"), []byte("20"), 0700))
+	if stat, err := os.Stat(filepath.Join(newCgroup, "cgroup.procs")); errors.Is(err, os.ErrNotExist) {
+		logrus.Error(err)
+	} else {
+		logrus.Infof("%+v", stat)
+	}
+	must(os.WriteFile(filepath.Join(newCgroup, "cgroup.procs"), []byte(strconv.FormatInt(int64(os.Getpid()), 10)), 0700))
+}
+
 func run() {
+	cg()
+
 	cmd := exec.Command("/proc/self/exe", append([]string{"child"}, os.Args[2:]...)...)
 	cmd.Stderr = os.Stderr
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
 	cmd.SysProcAttr = &syscall.SysProcAttr{
-		Cloneflags:   syscall.CLONE_NEWUTS | syscall.CLONE_NEWPID | syscall.CLONE_NEWNS | syscall.CLONE_NEWUSER,
+		Cloneflags:   syscall.CLONE_NEWUTS | syscall.CLONE_NEWPID | syscall.CLONE_NEWNS | syscall.CLONE_NEWUSER | syscall.CLONE_NEWCGROUP,
 		Unshareflags: syscall.CLONE_NEWNS,
 		UidMappings: []syscall.SysProcIDMap{
 			{
