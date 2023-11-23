@@ -18,6 +18,7 @@ func must(err error) {
 	}
 }
 
+// how to determine cgroup namespace is enabled?
 func cg() {
 	newCgroup := "/sys/fs/cgroup/system.slice/naive-container.service"
 	if _, err := os.Stat(newCgroup); errors.Is(err, os.ErrNotExist) {
@@ -88,7 +89,7 @@ func child() {
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
-	cmd.Env = []string{"PS1=-[naive-container]- # "}
+	cmd.Env = []string{`PS1=\w \$`}
 	if err := cmd.Run(); err != nil {
 		logrus.WithField("stack", string(debug.Stack())).Errorf("ERR: %v", err)
 		return
