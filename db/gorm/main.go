@@ -20,9 +20,9 @@ func main() {
 	// }
 
 	// ======== read ========
-	res, err := queryByName("a; drop table users")
+	res, err := queryByID(12345)
 	if err != nil {
-		logrus.Error(err)
+		// logrus.Error(err)
 	} else {
 		fmt.Printf("%+v", res)
 	}

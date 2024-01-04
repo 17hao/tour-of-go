@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -41,15 +42,16 @@ func queryByIDs(ids []int64) ([]employee, error) {
 	return es, nil
 }
 
-func queryByID() *employee {
+func queryByID(id int64) (*employee, error) {
 	e := &employee{}
-	sql := getLocalDB().Limit(1)
-	sql = sql.Order("id")
-	if err := sql.Where("id=?", "1").Find(&e).Error; err != nil {
+	ctx := context.Background()
+	ctx = context.WithValue(ctx, "table", "employees")
+	sql := getLocalDB().WithContext(ctx)
+	if err := sql.Where("id=?", id).First(&e).Error; err != nil {
 		// if err := getLocalDB().Table("employees").Where("id=?", "1").First(e).Error; err != nil {
-		logrus.Printf("%+v\n", err)
+		return nil, err
 	}
-	return e
+	return e, nil
 }
 
 func queryByAge() []employee {
