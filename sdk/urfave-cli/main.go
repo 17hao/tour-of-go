@@ -31,7 +31,7 @@ var showCommand = &cli.Command{
 	},
 }
 
-// my-cli show global options or command options or arguments
+// my-cli show global options or sub-command options or sub-command arguments
 func main() {
 	app := &cli.App{
 		Name:      "my-cli",
