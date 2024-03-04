@@ -1,0 +1,1 @@
+[JSON RFC](https://datatracker.ietf.org/doc/html/rfc8259)
