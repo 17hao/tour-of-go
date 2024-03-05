@@ -6,7 +6,7 @@ import (
 )
 
 func TestScan(t *testing.T) {
-	input := `{"str": "a neat string", "num": 3.14159, "obj": {"num": -1}, "arr": [1,2,3]}`
+	input := `{"str": "a neat string", "num": 3.14159, "bool": true, "null":null, "obj": {"num": -1}, "arr": [1,2,3]}`
 	l := NewLexer(input)
 	for {
 		token, err := l.Scan()

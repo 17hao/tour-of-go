@@ -40,7 +40,7 @@ func (l *Lexer) readValue(start int) (string, Type, error) {
 	switch l.Input[start] {
 	case 't':
 		if start+4 < len(l.Input) {
-			str := string(l.Input[start : start+5])
+			str := string(l.Input[start : start+4])
 			if str == "true" {
 				l.Position += 5
 				return "true", True, nil
@@ -49,7 +49,7 @@ func (l *Lexer) readValue(start int) (string, Type, error) {
 		return "", Invalid, errors.New("invalid json value, expect true")
 	case 'f':
 		if start+5 < len(l.Input) {
-			str := string(l.Input[start : start+6])
+			str := string(l.Input[start : start+5])
 			if str == "false" {
 				l.Position += 6
 				return "false", False, nil
@@ -58,7 +58,7 @@ func (l *Lexer) readValue(start int) (string, Type, error) {
 		return "", Invalid, errors.New("invalid json value, expect false")
 	default:
 		if start+4 < len(l.Input) {
-			str := string(l.Input[start : start+5])
+			str := string(l.Input[start : start+4])
 			if str == "null" {
 				l.Position += 5
 				return "null", Null, nil

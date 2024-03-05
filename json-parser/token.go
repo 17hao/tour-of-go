@@ -33,5 +33,5 @@ type Token struct {
 }
 
 func (t Token) String() string {
-	return fmt.Sprintf("Type=%8s\t\tLiteral=%15s\t\tStart=%3d\t\tEnd=%3d", t.Type, t.Literal, t.Start, t.End)
+	return fmt.Sprintf("Start=%-3d\t\tEnd=%-3d\t\tType=%-8s\t\tLiteral=%s\t\t", t.Start, t.End, t.Type, t.Literal)
 }
